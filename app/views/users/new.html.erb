@@ -1,0 +1,36 @@
+<h1>New user</h1>
+
+<% form_for(@user, :url => users_path(:next_step => @user.next_step)) do |f| %>
+  <%= f.error_messages %>
+
+  <% case @user.step
+     when '1', nil %>
+  <p>
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <% when '2' %>
+  <p>
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+
+  <p>
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </p>
+
+    <%= f.hidden_field :login %>
+    <%= f.hidden_field :email %>
+  <% end %>
+
+  <%= f.hidden_field :step, :value => @user.step %>
+  <p>
+    <%= f.submit 'Next &rarr;' %>
+  </p>
+<% end %>
